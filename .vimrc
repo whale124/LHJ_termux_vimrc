@@ -51,8 +51,8 @@ nmap <F4> :wqa!<CR>								" 모든 창 저장하고 닫기
 nmap <Leader>x :q!<CR>							" 저장하지 않고 닫기
 nmap <Leader>s :w!<CR>							" 강제로 저장하기
 
-nmap <Leader>og :!gedit % &<CR><CR>				" gedit에서 열기
-nmap <Leader>of :!nemo % &<CR><CR>				" NEMO 열기
+"nmap <Leader>og :!gedit % &<CR><CR>				" gedit에서 열기
+"nmap <Leader>of :!nemo % &<CR><CR>				" NEMO 열기
 nmap <C-D> :below term ++rows=10<CR>
 
 "설정 관련
@@ -121,16 +121,16 @@ endfunction
 "===================================================================
 
 "arduino file
-au BufNewFile,BufRead *.ino exec ShortArduino()
-function ShortArduino()
-	" Arduio CLI Setting
-	:map <Leader>ab :w!\| :! clear;python3 /usr/share/arduino-cli/vim-board.py<CR>
-	:map <Leader>as :w!\| :! clear;python3 /usr/share/arduino-cli/vim-setting.py<CR>
-	
-	" 컴파일
-	:map <F5> :w!\| :! clear;python3 /usr/share/arduino-cli/vim-upload.py % 0<CR>
-	:map <F6> :w!\| :! clear;python3 /usr/share/arduino-cli/vim-upload.py % 1<CR>
-endfunction
+"au BufNewFile,BufRead *.ino exec ShortArduino()
+"function ShortArduino()
+"	" Arduio CLI Setting
+"	:map <Leader>ab :w!\| :! clear;python3 /usr/share/arduino-cli/vim-board.py<CR>
+"	:map <Leader>as :w!\| :! clear;python3 /usr/share/arduino-cli/vim-setting.py<CR>
+"	
+"	" 컴파일
+"	:map <F5> :w!\| :! clear;python3 /usr/share/arduino-cli/vim-upload.py % 0<CR>
+"	:map <F6> :w!\| :! clear;python3 /usr/share/arduino-cli/vim-upload.py % 1<CR>
+"endfunction
 
 "===================================================================
 
