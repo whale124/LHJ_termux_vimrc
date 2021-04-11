@@ -40,6 +40,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'AutoComplPop'
 
 call vundle#end()
+
 "===================================================================
 
 " 단축키
@@ -57,7 +58,7 @@ nmap <C-D> :below term ++rows=10<CR>
 
 "설정 관련
 nmap <Leader>vn :set number!<CR>				" 줄 번호
-nmap <Leader>vs :rightbelow vnew $MYVIMRC<CR>	" VIMRC 열기
+"nmap <Leader>vs :rightbelow vnew $MYVIMRC<CR>	" VIMRC 열기
 nmap <Leader>vs :tabedit $MYVIMRC<CR>			" VIMRC 열기
 
 " 창 이동
@@ -93,17 +94,17 @@ nnoremap <Leader>t :TagbarToggle<CR>
 "C file
 au BufNewFile,BufRead *.c exec ShortC()
 function ShortC()
+	" 하단 창 분활 후 컴파일
 	:map <F5> :w!\| :below term ++rows=10 gcc % -o %<.out<CR>
 	:map <F6> :w!\| :below term ++rows=10 ./%<.out<CR>
 
 	" 새 창에서 컴파일&업로드
-	":map <Leader><F5> :w!\| :! clear;gnome-terminal -- python3 ~/.vim/my_vim/vim-C.py % %< 1<CR><CR>
-	":map <Leader><F6> :w!\| :! clear;gnome-terminal -- python3 ~/.vim/my_vim/vim-C.py % %< 0<CR><CR>
 	:map <Leader><F5> :w!\| :tab term gcc % -o %<.out<CR>
 	:map <Leader><F6> :w!\| :tab term ./%<.out<CR>
 	
 	" 파일 지우기
-	:nmap <Leader>rd :w!\| :! clear;mv *.out ~/.local/share/Trash/;ls -l<CR>
+	":nmap <Leader>rd :w!\| :! clear;mv *.out ~/.local/share/Trash/;ls -l<CR>
+	:nmap <Leader>rd :w!\| :below term ++rows=10 ~/.vim/my_vim/remove_out.sh<CR>
 endfunction
 
 "===================================================================
@@ -111,10 +112,10 @@ endfunction
 "Python file
 au BufNewFile,BufRead *.py exec ShortPython()
 function ShortPython()
+	" 하단 창 분활 후 컴파일
 	:map <F5> :w!\| :below term ++rows=10 python3 %<CR>
 	
 	" 새창에서 컴파일&업로드
-	":map <Leader><F5> :w!\| :! clear;gnome-terminal -- python3 ~/.vim/my_vim/vim-python.py %<CR><CR>
 	:map <Leader><F5> :w!\| : term python3 %<CR>
 endfunction
 
@@ -131,6 +132,20 @@ endfunction
 "	:map <F5> :w!\| :! clear;python3 /usr/share/arduino-cli/vim-upload.py % 0<CR>
 "	:map <F6> :w!\| :! clear;python3 /usr/share/arduino-cli/vim-upload.py % 1<CR>
 "endfunction
+
+"===================================================================
+
+"Bash file
+au BufNewFile,BufRead *.sh exec ShortBash()
+function ShortBash()
+	:map <F5> :w!\| :below term ++rows=10 chmod +x %<CR>
+	
+	 " 하단 창 분활 후 컴파일
+	:map <F6> :w!\| :below term ++rows=10 ./%<CR>
+	
+	" 새창에서 컴파일&업로드
+	:map <Leader><F6> :w!\| : term ./%<CR>
+endfunction
 
 "===================================================================
 
