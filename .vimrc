@@ -104,7 +104,7 @@ function ShortC()
 	
 	" 파일 지우기
 	":nmap <Leader>rd :w!\| :! clear;mv *.out ~/.local/share/Trash/;ls -l<CR>
-	:nmap <Leader>rd :w!\| :below term ++rows=10 ~/.vim/my_vim/remove_out.sh<CR>
+	:nmap <Leader>rd :w!\| :below term ++rows=20 remove_out.sh<CR>
 endfunction
 
 "===================================================================
