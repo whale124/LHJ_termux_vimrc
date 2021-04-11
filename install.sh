@@ -1,3 +1,6 @@
+# pkg install git
+# git clone https://github.com/whale124/LHJ_termux_vimrc.git
+
 echo "INSTALL"
 
 # termux 스토리지 접근 권한
