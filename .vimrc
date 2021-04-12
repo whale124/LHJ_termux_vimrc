@@ -54,7 +54,13 @@ nmap <Leader>s :w!<CR>							" 강제로 저장하기
 
 "nmap <Leader>og :!gedit % &<CR><CR>				" gedit에서 열기
 "nmap <Leader>of :!nemo % &<CR><CR>				" NEMO 열기
+
+" term
 nmap <C-D> :below term ++rows=10<CR>
+
+" term terminal mode stop
+" press "i" to restart term
+tnoremap <Esc> <C-W>N
 
 "설정 관련
 nmap <Leader>vn :set number!<CR>				" 줄 번호
@@ -71,7 +77,8 @@ nmap <C-L> <C-W>l                           	" 오른쪽 창으로 이동
 nnoremap <Leader>rc :rightbelow vnew %<CR>
 nnoremap <Leader>rn :rightbelow vnew<CR>
 
-nnoremap <Leader>rtn :tabnew<cr>				" 새 탭으로 열기
+nmap <Leader>mv :tab vnew %<CR>					" copy to new tab
+nnoremap <Leader>rtn :tabnew<CR>				" 새 탭으로 열기
 " n번 째 탭 이동: 일반 모드에서 ngt
 
 " 창 크기 조절
