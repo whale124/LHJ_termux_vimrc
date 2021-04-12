@@ -34,4 +34,17 @@ ln -s ~/.vim/my_vim/remove_out.sh ~/../usr/bin
 # 폴더 생성
 mkdir -p ~/.local/share/Trash/
 
+read -p "Do you want to install 'Termux Style'? [Y/N]:" an_style
+if [ "$an_style" = Y ] || [ "$an_style" =y ]
+then
+	read -p "Do you want to install 'D2Coding'? [Y/N]:" an_font
+	git clone https://github.com/adi1090x/termux-style
+	
+	if [ "$an_font" = Y ] || [ "$an_font" =y ]
+	then
+		wget https://github.com/Joungkyun/font-d2coding/blob/master/D2Coding.ttf -P termux-style/fonts	
+	fi
+	./termux-style/install
+fi
+
 rm -rf LHJ_termux_vimrc
