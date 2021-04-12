@@ -5,7 +5,7 @@ echo "GCC file remover"
 echo -e "Trash BIN = ~/local/share/Trash\n"
 
 
-list_del=`ls |grep *.out`
+list_del=`ls |grep \\.out$`
 
 # 파일 목록이 NULL 값이라면
 if [ -z "$list_del" ]
