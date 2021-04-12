@@ -1,7 +1,7 @@
 # pkg install git
 # git clone https://github.com/whale124/LHJ_termux_vimrc.git
 
-echo "INSTALL"
+echo "Termux INSTALL"
 
 # termux 스토리지 접근 권한
 termux-setup-storage 
@@ -16,6 +16,10 @@ pkg install vim -y
 
 pkg install clang -y
 pkg install python -y
+
+apt-get update&&apt-get upgrade
+apt-get ctags
+apt-get build-essential
 
 # 파일 복사
 mv .bashrc .vim* ~
