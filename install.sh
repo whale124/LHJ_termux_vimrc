@@ -35,6 +35,8 @@ ln -s ~/.vim/my_vim/remove_out.sh ~/../usr/bin
 # 폴더 생성
 mkdir -p ~/.local/share/Trash/
 
+echo -e "\nTermux Style\n"
+
 cd $HOME
 
 read -p "Do you want to install 'Termux Style'? [Y/N]:" an_style
@@ -53,4 +55,6 @@ then
 	termux-style
 fi
 
+cd $HOME
+echo -e "\ntype 'termux-style'"
 rm -rf LHJ_termux_vimrc
