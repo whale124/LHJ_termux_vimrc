@@ -1,3 +1,4 @@
+
 # pkg install git
 # git clone https://github.com/whale124/LHJ_termux_vimrc.git
 
@@ -22,8 +23,8 @@ apt-get ctags
 apt-get build-essential
 
 # 파일 복사
-mv .bashrc .vim* ~
-cd ~
+mv .bashrc .vim* $HOME
+cd $HOME
 
 # vim bundle 설치
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -34,17 +35,22 @@ ln -s ~/.vim/my_vim/remove_out.sh ~/../usr/bin
 # 폴더 생성
 mkdir -p ~/.local/share/Trash/
 
+cd $HOME
+
 read -p "Do you want to install 'Termux Style'? [Y/N]:" an_style
-if [ "$an_style" = Y ] || [ "$an_style" =y ]
+if [ "$an_style" = Y ] || [ "$an_style" = y ]
 then
 	read -p "Do you want to install 'D2Coding'? [Y/N]:" an_font
 	git clone https://github.com/adi1090x/termux-style
-	
-	if [ "$an_font" = Y ] || [ "$an_font" =y ]
+
+	cd termux-style
+	if [ "$an_font" = Y ] || [ "$an_font" = y ]
 	then
-		wget https://github.com/Joungkyun/font-d2coding/blob/master/D2Coding.ttf -P termux-style/fonts	
+		wget https://github.com/Joungkyun/font-d2coding/blob/master/D2Coding.ttf -P ./fonts	
 	fi
-	./termux-style/install
+	./install
+
+	termux-style
 fi
 
 rm -rf LHJ_termux_vimrc
