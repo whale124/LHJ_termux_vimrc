@@ -18,9 +18,8 @@ pkg install vim -y
 pkg install clang -y
 pkg install python -y
 
-apt-get update&&apt-get upgrade
-apt-get ctags
-apt-get build-essential
+pkg install ctags -y
+pkg install build-essential -y
 
 # 파일 복사
 mv .bashrc .vim* $HOME
@@ -57,4 +56,5 @@ fi
 
 cd $HOME
 echo -e "\ntype 'termux-style'"
+rm -rf termux-style
 rm -rf LHJ_termux_vimrc
