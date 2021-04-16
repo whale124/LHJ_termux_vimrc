@@ -22,6 +22,14 @@ pkg install ctags -y
 pkg install build-essential -y
 
 # 파일 복사
+test_bashrc=`ls $HOME/.bashrc`
+
+if [ -z "$test_bashrc" ]
+then
+else
+	mv $HOME/.bashrc $HOME/.bashrc_bak			# Backup
+fi
+
 mv .bashrc .vim* $HOME
 cd $HOME
 
@@ -56,5 +64,14 @@ fi
 
 cd $HOME
 echo -e "\ntype 'termux-style'"
-rm -rf termux-style
-rm -rf LHJ_termux_vimrc
+
+read -p "Do you want to keep the installation files? [Y/N]: " an_keep
+if [ "$an_keep" = Y ] || [ "$an_keep" = y ]
+then
+	echo "Keep."
+else
+	rm -rf termux-style
+	rm -rf LHJ_termux_vimrc
+fi
+
+echo "Done"
