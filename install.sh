@@ -1,4 +1,4 @@
-
+# 2021/04/16
 # pkg install git
 # git clone https://github.com/whale124/LHJ_termux_vimrc.git
 
