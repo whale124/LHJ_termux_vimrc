@@ -39,6 +39,9 @@ Plugin 'majutsushi/tagbar'
 " 자동 완성
 Plugin 'AutoComplPop'
 
+" C/C++ syntax
+Plugin 'octol/vim-cpp-enhanced-highlight'
+
 call vundle#end()
 
 "===================================================================
@@ -48,18 +51,21 @@ let mapleader=","
 nmap <Leader>= gg=G								" 자동 들여쓰기
 
 " 기본
-nmap <F4> :wqa!<CR>								" 모든 창 저장하고 닫기
-nmap <Leader>x :q!<CR>							" 저장하지 않고 닫기
-nmap <Leader>s :w!<CR>							" 강제로 저장하기
+nmap <F4> :qa<CR>								" 모든 창 닫기
 
-"nmap <Leader>og :!gedit % &<CR><CR>				" gedit에서 열기
-"nmap <Leader>of :!nemo % &<CR><CR>				" NEMO 열기
+" nmap <Leader>x :q<CR>								" 저장하지 않고 닫기
+" nmap <Leader>X :q!<CR>							" 저장하지 않고 강제로 닫기
+
+" nmap <Leader>s :w!<CR>							" 강제로 저장하기
+
+" nmap <Leader>og :!gedit "%" &<CR><CR>				" gedit에서 열기
+" nmap <Leader>of :!nemo "%" &<CR><CR>				" NEMO 열기
 
 " term
 nmap <C-D> :below term ++rows=10<CR>
 
-" term terminal mode stop
-" press "i" to restart term
+" term 터미널 모드 중단
+" i 눌러서 다시 시작
 tnoremap <Esc> <C-W>N
 
 "설정 관련
@@ -77,20 +83,19 @@ nmap <C-L> <C-W>l                           	" 오른쪽 창으로 이동
 nnoremap <Leader>rc :rightbelow vnew %<CR>
 nnoremap <Leader>rn :rightbelow vnew<CR>
 
-nmap <Leader>mv :tab vnew %<CR>					" copy to new tab
-nnoremap <Leader>rtn :tabnew<CR>				" 새 탭으로 열기
+nnoremap <Leader>mv :tab vnew %<CR>				" 새 탭으로 복사
+nnoremap <Leader>rtn :tabnew<cr>				" 새 탭으로 열기
 " n번 째 탭 이동: 일반 모드에서 ngt
 
 " 창 크기 조절
-nmap <S-N> <C-W>-
-nmap <S-M> <C-W>+
+"nmap <S-N> <C-W>-
+"nmap <S-M> <C-W>+
 
 nmap <C-N> <C-W><
 nmap <C-M> <C-W>>
 
-
 " NERDtree
-nnoremap <C-F> :NERDTreeFind<CR>
+" nnoremap <C-F> :NERDTreeFind<CR>
 nnoremap <Leader>n :NERDTreeToggle<CR>
 
 "C tags
@@ -105,13 +110,18 @@ function ShortC()
 	:map <F5> :w!\| :below term ++rows=10 gcc % -o %<.out<CR>
 	:map <F6> :w!\| :below term ++rows=10 ./%<.out<CR>
 
-	" 새 창에서 컴파일&업로드
+	" 새 창에서 컴파일
 	:map <Leader><F5> :w!\| :tab term gcc % -o %<.out<CR>
 	:map <Leader><F6> :w!\| :tab term ./%<.out<CR>
+
+	" 하단 창 분활 후 Makefile 컴파일
+	:map <S-F5> :w!\| :below term ++rows=10 ./Makefile<CR>
+	:map <S-F6> :w!\| :below term ++rows=10 ./main.out<CR>
+
 	
 	" 파일 지우기
 	":nmap <Leader>rd :w!\| :! clear;mv *.out ~/.local/share/Trash/;ls -l<CR>
-	:nmap <Leader>rd :w!\| :below term ++rows=20 remove_out.sh %:p %:t<CR>
+	:nmap <Leader>rd :w!\| :below term ++rows=20 /home/$USER/.vim/my_vim/remove_out.sh %:p %:t<CR>
 endfunction
 
 "===================================================================
@@ -128,17 +138,14 @@ endfunction
 
 "===================================================================
 
-"arduino file
-"au BufNewFile,BufRead *.ino exec ShortArduino()
-"function ShortArduino()
-"	" Arduio CLI Setting
-"	:map <Leader>ab :w!\| :! clear;python3 /usr/share/arduino-cli/vim-board.py<CR>
-"	:map <Leader>as :w!\| :! clear;python3 /usr/share/arduino-cli/vim-setting.py<CR>
-"	
-"	" 컴파일
-"	:map <F5> :w!\| :! clear;python3 /usr/share/arduino-cli/vim-upload.py % 0<CR>
-"	:map <F6> :w!\| :! clear;python3 /usr/share/arduino-cli/vim-upload.py % 1<CR>
-"endfunction
+"Latex file
+au BufNewFile,BufRead *.tex exec ShortLatex()
+function ShortLatex()
+	" 새창에서 컴파일&업로드
+	:map <F5> :w!\| :tab term pdflatex %<CR>
+
+	:map <F6> :w!\| : !firefox %<.pdf<CR>
+endfunction
 
 "===================================================================
 
@@ -155,6 +162,23 @@ function ShortBash()
 endfunction
 
 "===================================================================
+"
+""arduino file
+"au BufNewFile,BufRead *.ino exec ShortArduino()
+"function ShortArduino()
+"	" Arduio CLI Setting
+"	:map <Leader>ab :w!\| :! clear;python3 /usr/share/arduino-cli/vim-board.py<CR>
+"	:map <Leader>as :w!\| :! clear;python3 /usr/share/arduino-cli/vim-setting.py<CR>
+"	
+"	" 컴파일
+"	:map <F5> :w!\| :! clear;python3 /usr/share/arduino-cli/vim-upload.py % 0<CR>
+"	:map <F6> :w!\| :! clear;python3 /usr/share/arduino-cli/vim-upload.py % 1<CR>
+"	
+"	" 아두이노 IDE에서 열기
+"	:map <Leader>oa :w!\| :! clear;arduino %<CR>
+"endfunction
+"
+""===================================================================
 
 "fcitx 한글 
 "if has('mac') && filereadable('/usr/local/lib/libInputSourceSwitcher.dylib')
